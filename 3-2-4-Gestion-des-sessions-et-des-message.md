@@ -23,10 +23,10 @@ app.secret_key = 'une_cle_tres_secrete_et_complexe'
 L'objet `session` s'utilise comme un dictionnaire Python classique.
 
 ```python
-from flask import Flask, session, redirect, url_for, request
+from flask import Flask, session, redirect, url_for, request, secrets
 
 app = Flask(__name__)
-app.secret_key = 'super_secret'
+app.secret_key = secrets.token_hex(32)
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -60,10 +60,10 @@ Le principe est simple : on enregistre un message à la fin d'une requête, et o
 La fonction `flash()` permet d'enregistrer un message. Il est possible de lui associer une catégorie (ex: 'succes', 'erreur', 'info') pour adapter le style d'affichage.
 
 ```python
-from flask import Flask, flash, redirect, render_template, request
+from flask import Flask, flash, redirect, render_template, request, secrets
 
 app = Flask(__name__)
-app.secret_key = 'super_secret'
+app.secret_key = secrets.token_hex(32);
 
 @app.route('/connexion', methods=['GET', 'POST'])
 def connexion():
